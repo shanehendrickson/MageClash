@@ -58,17 +58,217 @@
         <div class="col-lg-8">
           <pre class="line-numbers">
             <code class="language-javascript">
-              // Call Hello World
-              function HelloWorld() {
-                alert("Hello World");
-              }
+              
+const possibleChoices = document.querySelectorAll('.magic-type');
+const userCastDisplay = document.getElementById('user-cast');
+const cpuCastDisplay = document.getElementById('cpu-cast');
+const castResultDisplay = document.getElementById('cast-result');
+const userHealthDisplay = document.getElementById('user-health');
+const cpuHealthDisplay = document.getElementById('cpu-health');
+
+const modal = document.querySelector('#modal');
+const overlay = document.querySelector('#overlay');
+const newGame = document.querySelector('#new-game');
+const clashVictorDisplay = document.getElementById('clashVictor');
+
+let userCast, cpuCast, castResult, clashVictor;
+let userHealth = 10;
+let cpuHealth = 10;
+
+userHealthDisplay.innerHTML = userHealth;
+cpuHealthDisplay.innerHTML = cpuHealth;
+
+// check for magic button clicks
+possibleChoices.forEach(pChoice => pChoice.addEventListener('click', (e) => {
+  userCast = e.target.id;
+  userCastDisplay.className = '';
+
+  // HTML NOTE
+  switch(userCast) {
+    case 'tree': 
+      userCastDisplay.innerHTML = '<i id="tree" class="fa-solid fa-leaf"></i>';
+      userCastDisplay.classList.add('tree');
+      break;
+    case 'bolt': 
+      userCastDisplay.innerHTML = '<i id="bolt" class="fa-solid fa-bolt"></i>';
+      userCastDisplay.classList.add('bolt');
+      break;
+    case 'wind': 
+      userCastDisplay.innerHTML = '<i id="wind" class="fa-solid fa-wind"></i>';
+      userCastDisplay.classList.add('wind');
+      break;
+    case 'flame': 
+      userCastDisplay.innerHTML = '<i id="flame" class="fa-solid fa-fire"></i>';
+      userCastDisplay.classList.add('flame');
+      break;
+    case 'wave': 
+      userCastDisplay.innerHTML = '<i id="wave" class="fa-solid fa-water"></i>';
+      userCastDisplay.classList.add('wave');
+  }
+
+  generateCpuCast();
+  getResult();
+  endGame();
+
+  userHealthDisplay.innerHTML = userHealth;
+  cpuHealthDisplay.innerHTML = cpuHealth;
+}))
+
+// generate CPU choice
+function generateCpuCast() {
+  const randomNum = Math.floor(Math.random() * possibleChoices.length) + 1;
+  switch(randomNum) {
+    case 1: cpuCast = 'tree'; break;
+    case 2: cpuCast = 'bolt'; break;
+    case 3: cpuCast = 'wind'; break;
+    case 4: cpuCast = 'flame'; break;
+    case 5: cpuCast = 'wave'; break;
+  }
+
+  cpuCastDisplay.className = '';
+
+  // HTML NOTE
+  switch(cpuCast) {
+    case 'tree': 
+      cpuCastDisplay.innerHTML = '<i id="tree" class="fa-solid fa-leaf"></i>';
+      cpuCastDisplay.classList.add('tree');
+      break;
+    case 'bolt': 
+      cpuCastDisplay.innerHTML = '<i id="bolt" class="fa-solid fa-bolt"></i>';
+      cpuCastDisplay.classList.add('bolt');
+      break;
+    case 'wind': 
+      cpuCastDisplay.innerHTML = '<i id="wind" class="fa-solid fa-wind"></i>';
+      cpuCastDisplay.classList.add('wind');
+      break;
+    case 'flame': 
+      cpuCastDisplay.innerHTML = '<i id="flame" class="fa-solid fa-fire"></i>';
+      cpuCastDisplay.classList.add('flame');
+      break;
+    case 'wave': 
+      cpuCastDisplay.innerHTML = '<i id="wave" class="fa-solid fa-water"></i>';
+      cpuCastDisplay.classList.add('wave');
+      break;
+  }
+}
+
+// get result of casting choices
+function getResult() {
+  if(userCast === cpuCast) {
+    castResult = 'Draw';
+  } else if(userCast === 'wind') {
+    if(cpuCast === 'wave' || cpuCast === 'flame') {
+      castResult = 'You Win';
+      cpuHealth -= 1;
+    } else if(cpuCast === 'bolt' || cpuCast === 'tree') {
+      castResult = 'CPU Wins';
+      userHealth -= 1;
+    }
+} else if(userCast === 'wave') {
+    if(cpuCast === 'flame' || cpuCast === 'bolt') {
+      castResult = 'You Win';
+      cpuHealth -= 1;
+    } else if(cpuCast === 'tree' || cpuCast === 'wind') {
+      castResult = 'CPU Wins';
+      userHealth -= 1;
+    }
+} else if(userCast === 'flame') {
+    if(cpuCast === 'bolt' || cpuCast === 'tree') {
+      castResult = 'You Win';
+      cpuHealth -= 1;
+    } else if(cpuCast === 'wind' || cpuCast === 'wave') {
+      castResult = 'CPU Wins';
+      userHealth -= 1;
+    }  
+} else if(userCast === 'bolt') {
+    if(cpuCast === 'tree' || cpuCast === 'wind') {
+      castResult = 'You Win';
+      cpuHealth -= 1;
+    } else if(cpuCast === 'wave' || cpuCast === 'flame') {
+      castResult = 'CPU Wins';
+      userHealth -= 1;
+    } 
+} else if(userCast === 'tree') {
+    if(cpuCast === 'wind' || cpuCast === 'wave') {
+      castResult = 'You Win';
+      cpuHealth -= 1;
+    } else if(cpuCast === 'bolt' || cpuCast === 'flame') {
+      castResult = 'CPU Wins';
+      userHealth -= 1;
+    }
+}
+castResultDisplay.innerHTML = castResult
+}
+
+// test for end game conditions
+function endGame() {
+  if(userHealth === 0 || cpuHealth === 0) {
+    modal.classList.add('open');
+    overlay.classList.add('open');
+
+    if(userHealth === 0) {
+      clashVictor = 'You LOSE!';
+      clashVictorDisplay.innerHTML = clashVictor;
+    } else {
+      clashVictor = 'You WIN!!!';
+      clashVictorDisplay.innerHTML = clashVictor;
+    }
+  }
+}
+
+// reload page
+newGame.addEventListener('click', (e) => {
+  location.reload();
+})
+
             </code>
           </pre>
         </div>
-        <div class="col-lg-4">
-          <p>The Code is structure in one function.</p>
-          <h5>Hello World</h5>
-          <p>Hello World is a function that displays an alert with a message of "Hello World".</p>
+        <div class="col-lg-4">          
+          <h5>Mage Clash</h5>
+          <p>Rock-Paper-Scissors with 5 options and an ultimate victor.</p>
+
+          <h6>1 - 18</h6>
+          <p>Establishing all major variables. 1 allows access to the five buttong types by grabbing them all with their like class and storing them in a variable. 2-5 allow access to a specific area on the page where information will be written. 8 - 11 take care of the end game modal pop-up. 13 - 15 establish all other variables that will be used and then 17 - 18 write two of those values immediately to the page.</p>
+
+          <h6>21 - 23</h6>
+          <p>I grabbed the five buttons by their class name above. Here, I'm looping through them to listen for a click event. When the user clicks, this targets the id of the clicked button and stores it as the user's casting choice. It also resets the class list of the display variable. I found I had to do this to prevent styles from being perpetually saved once used.</p>
+
+          <h6>25 - 46</h6>
+          <p>HTML NOTE: HTML doesn't properly display in the code to the left. What's actually being added by innerHTML is not an empty string, but an i tag with a Font Awesome icon, the same one as displayed on whichever button was clicked.</p>
+          <p>Here, I'm testing the id that was targeted and assigned to the userCast variable in the previous step. This code checks each possible case, writes the corresponding icon to the page, and then adds a class that styles that icon as determined through CSS.</p>
+
+          <h6>48 - 50</h6>
+          <p>Now that the user has selected which spell they'd like to cast, I call the other three functions in the code (which will be described below). They will:
+            <ol>
+              <li>Randomly generate a CPU magic choice</li>
+              <li>Compare the user's choice to the CPU's choice and determine a round winner</li>
+              <li>Check to see if either player has lost all health</li>
+            </ol>
+          </p>
+
+          <h6>52 - 53</h6>
+          <p>Finally, this function closes out by updating the player health displays.</p>
+
+          <h6>57 - 65</h6>
+          <p>function generateCpuCast is called when the player clicks on one of the magic buttons. This function first generates a random number from 1 - 5 (although since I used possibleChoices, it would take little work to add even more options and automatically generate a random number from a higher range). Next, given the number just generated, a casting choice is assigned to the variable that stores the CPU's choice.</p>
+
+          <h6>67 - 92</h6>
+          <p>HTML NOTE: Again, HTML code doesn't display properly in the module to the left, so what's actually being written with innerHTML is a Font Awesome icon, not an empty string as it appears to be.</p>
+          <p>This is exactly the same as what happens for the user in lines 25 - 46, except now it's the CPU's choice getting written to the page and styled.</p>
+
+          <h6>94 - 140</h6>
+          <p>getResult function will now compare the choices of the player with the randomly assigned choice of the CPU. The first thing it will do (96 - 97) is check to see if the player chose the same magic as the CPU. If so, it's a DRAW. 'Draw' is written to the page, but nothing else happens.</p>
+          <p>If that's not the case, the function will check every other possible combination. I originally attempted to do this with another Switch statement, but altering the Health of either player was buggy, so I opted for nested if/else statments.</p>
+          <p>The check starts with one possible user choice, in this case 'wind'. It checks to see if the CPU chose 'wave' or 'flame', and if so, displays a win message to the user and deducts one health from the CPU. If that is not the case, it checks to see if the CPU cast 'bolt' or 'tree', and if so, displays a CPU win to the user and deducts one health from the user. This pattern continues until the function finds a true statement.</p>
+          <p>The result, which is stored in the castResult variable no matter what the outcome, is then written to the page.</p>
+
+          <h6>143 - 156</h6>
+          <p>The endGame function is the last function called in the possibleChoices loop. Here, the game is checking to see if either player has reached zero health points. If not, nothing executes and the loop continues as normal. However, if one of the values is zero, the modal and overlay are both activated by adding an 'open' class, which is styled in the CSS document. Either the user or the CPU is declared the victor. Since both the modal and overlay are displayed over the rest of the page, the player is unable to continue clicking the magic buttons.</p>
+
+          <h6>158 - 161</h6>
+          <p>This is just a simple check for a click event on the button that displays with the end game modal. When the button is clicked, the entire page is reloaded.</p>
+
         </div>
       </div>
     </div>

@@ -152,6 +152,7 @@ function endGame() {
   }
 }
 
+// reload page
 newGame.addEventListener('click', (e) => {
   location.reload();
 })
