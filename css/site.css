@@ -57,6 +57,93 @@ footer .social>a:hover {
   color: var(--secondary-color)
 }
 
+.tree {
+  color: green;
+  font-weight: 500;
+}
+
+.bolt {
+  color: orange;
+  font-weight: 500;
+}
+
+.wind {
+  color: gray;
+  font-weight: 500;
+}
+
+.flame {
+  color: red;
+  font-weight: 500;
+}
+
+.wave {
+  color: blue;
+  font-weight: 500;
+}
+
+button.magic-type {
+  background-color: white;
+  border-radius: 100%;
+  font-size: 3rem;
+  min-width: 80px;
+  border: var(--dark-color) solid 4px;
+  margin: 0 5px;
+}
+
+.poem-container {
+  justify-content: center;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+  .poem-container {
+    font-size: 0.8rem;
+  }
+
+  button.magic-type {
+    background-color: white;
+    border-radius: 100%;
+    font-size: 1.5rem;
+    min-width: 40px;
+    border: var(--dark-color) solid 2px;
+    margin: 0 5px;
+  }
+}
+
+#modal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  padding: 1rem;
+  border-radius: .25rem;
+  background-color: white;
+  z-index: 1;
+}
+
+#overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .75);
+  z-index: 1;
+}
+
+#modal.open {
+  display: block;
+}
+
+#overlay.open {
+  display: block;
+}
+
 code[class*="language-"],
   pre[class*="language-"] {
     white-space: pre-wrap;
@@ -64,9 +151,9 @@ code[class*="language-"],
     word-wrap: break-word;
   }
 
-/* .sticky-footer {
+.sticky-footer {
   position: sticky;
   left: 0;
   bottom: 0;
   width: 100%;
-} */
+}

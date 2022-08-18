@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     
-    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c7ed50e499.js" crossorigin="anonymous"></script>
     
     <link rel="stylesheet" href="css/site.css">
     <link rel="icon" type="image/png" href="img/favicon-16x16.png">
@@ -51,7 +51,69 @@
   </nav>
   <!-- ==== Main Section ==== -->
   <main class="flex-shrink-0">
-    <div class="container">
+
+    <div id="overlay"></div>
+    <div id="modal">
+      <h3><span id="clashVictor"></span></h3>
+      <button id="new-game">New Game</button>
+    </div>
+
+    <div class="container mt-5">
+      <div class="row row-cols-1 row-cols-lg-2">
+        <div class="col-lg-6">
+          <h1>Mage Clash</h1>
+          <h3>A Rock-Paper-Scissors Game</h3>
+          <h4 class="lead">
+            <div class="row">
+              <div class="container poem-container col-6">
+                <p>
+                  <span class="wind">wind</span> scatters <span class="wave">wave</span><br>
+                  <span class="wave">wave</span> douses <span class="flame">flame</span><br>
+                  <span class="flame">flame</span> absorbs <span class="bolt">bolt</span><br>
+                  <span class="bolt">bolt</span> splits <span class="tree">tree</span><br>
+                  <span class="tree">tree</span> blocks <span class="wind">wind</span><br>
+                </p>
+              </div>
+              
+              <div class="container poem-container col-6">
+                <p>
+                  <span class="wind">wind</span> snuffs <span class="flame">flame</span><br>
+                  <span class="flame">flame</span> burns <span class="tree">tree</span><br>
+                  <span class="tree">tree</span> diverts <span class="wave">wave</span><br>
+                  <span class="wave">wave</span> disperses <span class="bolt">bolt</span><br>
+                  <span class="bolt">bolt</span> rides <span class="wind">wind</span><br>
+                </p>
+              </div>
+          </h4>
+          <h2>Instructions</h2>
+          <p>Click on a button to cast a spell. The CPU Mage will also cast. The losing mage loses one health point. Last mage standing wins.</p>
+        </div>
+        <div class="col-lg-6">
+          <div class="row magic-buttons my-3">
+            <h5 class="d-flex justify-content-center">Choose a Magic to Cast</h5>
+            <div class="magic-container d-flex justify-content-center">
+              <button id="tree" class='magic-type tree'><i id="tree" class="fa-solid fa-leaf"></i></button>
+              <button id="bolt" class='magic-type bolt'><i id="bolt" class="fa-solid fa-bolt"></i></button>
+              <button id="wind" class='magic-type wind'><i id="wind" class="fa-solid fa-wind"></i></button>
+              <button id="flame" class='magic-type flame'><i id="flame" class="fa-solid fa-fire"></i></button>
+              <button id="wave" class='magic-type wave'><i id="wave" class="fa-solid fa-water"></i></button>
+            </div>
+          </div>
+          <div class="row mages my-3">
+            <div class="player-mage col-6">
+              <h3 class="mb-3">You cast: <span id="user-cast"></span></h3>
+              <h4>Health: <span id="user-health"></span></h4>
+            </div>
+            <div class="cpu-mage col-6">
+              <h3 class="mb-3">CPU casts: <span id="cpu-cast"></span></h3>
+              <h4>Health: <span id="cpu-health"></span></h4>
+            </div>
+          </div>
+          <div class="row results">
+            <h3>Result: <span id="cast-result"></span></h3>
+          </div>
+        </div>
+      </div>
 
     </div>
   </main>
